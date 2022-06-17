@@ -2,7 +2,6 @@ package com.food.ordering.system.order.service.domain;
 
 import com.food.ordering.system.domain.exception.DomainException;
 import com.food.ordering.system.order.service.domain.dto.create.CreateOrderCommand;
-import com.food.ordering.system.order.service.domain.dto.create.CreateOrderResponse;
 import com.food.ordering.system.order.service.domain.entity.Customer;
 import com.food.ordering.system.order.service.domain.entity.Order;
 import com.food.ordering.system.order.service.domain.entity.Restaurant;
@@ -13,12 +12,14 @@ import com.food.ordering.system.order.service.domain.ports.output.repository.Cus
 import com.food.ordering.system.order.service.domain.ports.output.repository.OrderRepository;
 import com.food.ordering.system.order.service.domain.ports.output.repository.RestaurantRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
+@Component
 public class OrderCreateHelper {
     final OrderDomainService orderDomainService;
     final OrderRepository orderRepository;
@@ -49,12 +50,10 @@ public class OrderCreateHelper {
         return orderCreatedEvent;
     }
 
-
     private Restaurant checkRestaurant(CreateOrderCommand createOrderCommand) {
         Restaurant restaurant = orderDataMapper.createOrderCommandToRestaurant(createOrderCommand);
         Optional<Restaurant> optionalRestaurant = restaurantRepository.findRestaurantInformation(restaurant);
         if (!optionalRestaurant.isPresent()) {
-
             log.warn("Could not find restaurant with id: {}", createOrderCommand.getRestaurantId());
             throw new DomainException("Could not find restaurant with id: " + createOrderCommand.getRestaurantId());
         }
