@@ -38,6 +38,5 @@ public class OrderController {
 
         log.info("Returning order status with tracking id: {}", trackOrderResponse.getOrderTrackingId());
         return ResponseEntity.ok(trackOrderResponse);
-
     }
 }
