@@ -17,7 +17,6 @@
         <module>order-container</module>
         <module>order-application</module>
         <module>order-messaging</module>
-        <module>order-messaging</module>
     </modules>
 
     <properties>
