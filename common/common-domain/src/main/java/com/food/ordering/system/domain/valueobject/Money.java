@@ -32,7 +32,7 @@ public class Money {
     }
 
     public Money multiply(double times) {
-        return new Money(setScale(this.amount.multiply(BigDecimal.valueOf(times))));
+        return new Money(setScale(this.amount.multiply(new BigDecimal(times))));
     }
 
     @Override
